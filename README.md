@@ -1,38 +1,37 @@
-# Calendrier personnel — V1
+# Calendrier personnel V2
 
-Calendrier personnel statique conçu pour GitHub Pages.
+Calendrier personnel statique destiné à être publié sur GitHub Pages.
 
 ## Fonctionnalités
 
-- Calendrier mensuel
-- Navigation entre les mois
-- Bouton « Aujourd'hui »
-- Création, modification et suppression d'événements
-- Date, heure, catégorie, description et couleur
-- Liste des événements à venir
-- Recherche
-- Mode clair / sombre
-- Interface responsive
-- Stockage local dans le navigateur
+- Calendrier mensuel.
+- Création, modification et suppression d'événements.
+- Recherche d'événements.
+- Mode clair / sombre.
+- Service par rotation configurable.
+- Rotation normale : 6 jours de travail + 4 jours de repos.
+- Horaires individuels pour les 6 jours :
+  - Jour : 06:30–16:00
+  - Soir : 14:30–00:00
+  - Nuit : 21:30–07:00
+- Service polyvalent : cycle de 8 jours avec 5 jours de travail et 3 jours de congé positionnables.
+- Repos affichés avec de fines hachures rouges.
+- Services affichés avec un fond bleu police transparent et l'horaire directement dans la cellule.
+- Vacances affichées avec un jaune très clair et sobre.
 
-## Installation GitHub Pages
+## Utilisation
 
-1. Créer un dépôt GitHub.
-2. Ajouter `index.html`, `style.css` et `script.js`.
-3. Dans **Settings → Pages** :
-   - Source : **Deploy from a branch**
-   - Branch : `main`
-   - Folder : `/ (root)`
-4. Enregistrer.
-5. GitHub fournira l'adresse du site.
+Ouvre `index.html` localement pour tester l'application.
 
-## Important concernant la V1
+Pour GitHub Pages :
+1. Crée un dépôt GitHub.
+2. Place `index.html`, `style.css` et `script.js` à la racine.
+3. Dans GitHub : Settings → Pages.
+4. Sélectionne la branche principale et le dossier `/root`.
+5. Enregistre.
 
-Les événements sont actuellement enregistrés avec `localStorage`.
+## Données
 
-Cela signifie que :
-- les données restent dans le navigateur utilisé ;
-- elles ne sont pas synchronisées entre appareils ;
-- vider les données du navigateur peut supprimer les événements.
+Cette V2 utilise `localStorage`. Les événements et la configuration de rotation sont donc stockés dans le navigateur utilisé.
 
-La structure de cette V1 est volontairement préparée pour qu'une future V2 puisse remplacer le stockage local par une base distante/authentifiée sans refaire l'interface.
+Pour une utilisation réellement synchronisée entre plusieurs appareils, une V3 pourra conserver exactement cette interface tout en remplaçant `localStorage` par une base distante privée avec authentification.

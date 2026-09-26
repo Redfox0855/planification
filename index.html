@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f4f4f1">
+  <meta name="theme-color" content="#f2f2ef">
   <title>Calendrier personnel</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -14,129 +14,146 @@
         <div class="eyebrow">ESPACE PERSONNEL</div>
         <h1>Calendrier</h1>
       </div>
-
-      <div class="topbar-actions">
-        <button id="todayBtn" class="button button-secondary">Aujourd'hui</button>
-        <button id="themeBtn" class="icon-button" aria-label="Changer le thème" title="Changer le thème">☾</button>
+      <div class="top-actions">
+        <button id="todayBtn" class="button secondary">Aujourd'hui</button>
+        <button id="rotationBtn" class="button secondary">Rotation</button>
+        <button id="themeBtn" class="button icon-button" title="Changer le thème">◐</button>
       </div>
     </header>
 
     <section class="calendar-card">
       <div class="calendar-header">
-        <button id="prevMonth" class="nav-button" aria-label="Mois précédent">←</button>
-
-        <div class="month-title">
-          <span id="monthName"></span>
-          <span id="yearName"></span>
+        <button id="prevMonth" class="nav-button">‹</button>
+        <div>
+          <div id="monthTitle" class="month-title"></div>
+          <div id="rotationSummary" class="month-subtitle"></div>
         </div>
-
-        <button id="nextMonth" class="nav-button" aria-label="Mois suivant">→</button>
+        <button id="nextMonth" class="nav-button">›</button>
       </div>
 
-      <div class="weekday-row">
-        <div>LUN</div><div>MAR</div><div>MER</div><div>JEU</div>
-        <div>VEN</div><div>SAM</div><div>DIM</div>
+      <div class="weekdays">
+        <div>Lun</div><div>Mar</div><div>Mer</div><div>Jeu</div><div>Ven</div><div>Sam</div><div>Dim</div>
       </div>
-
       <div id="calendarGrid" class="calendar-grid"></div>
     </section>
 
-    <section class="bottom-layout">
+    <section class="panels">
       <div class="panel">
         <div class="panel-heading">
           <div>
-            <div class="eyebrow">PROCHAINEMENT</div>
-            <h2>Événements à venir</h2>
+            <div class="eyebrow">AGENDA</div>
+            <h2>Prochains événements</h2>
           </div>
-          <button id="addEventBtn" class="button button-primary">+ Ajouter</button>
+          <button id="addEventBtn" class="button primary">+ Événement</button>
         </div>
-        <div id="upcomingEvents" class="upcoming-events"></div>
+        <div id="upcomingList" class="upcoming-list"></div>
       </div>
 
-      <div class="panel search-panel">
-        <div class="eyebrow">RECHERCHE</div>
-        <h2>Retrouver un événement</h2>
-        <input id="searchInput" class="text-input" type="search" placeholder="Rechercher..." autocomplete="off">
+      <div class="panel">
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">RECHERCHE</div>
+            <h2>Événements</h2>
+          </div>
+        </div>
+        <input id="searchInput" class="search-input" type="search" placeholder="Rechercher un événement...">
         <div id="searchResults" class="search-results"></div>
       </div>
     </section>
 
-    <footer class="footer">
-      <span>Calendrier personnel · V1</span>
-      <span id="storageStatus">Données enregistrées localement</span>
-    </footer>
+    <footer>Calendrier personnel · V2</footer>
   </main>
 
-  <div id="modalBackdrop" class="modal-backdrop hidden">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-header">
+  <div id="eventModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <div class="modal-heading">
         <div>
-          <div class="eyebrow">ÉVÉNEMENT</div>
-          <h2 id="modalTitle">Nouvel événement</h2>
+          <div class="eyebrow">AGENDA</div>
+          <h2 id="eventModalTitle">Nouvel événement</h2>
         </div>
-        <button id="closeModal" class="close-button" aria-label="Fermer">×</button>
+        <button id="closeEventModal" class="close-button">×</button>
       </div>
 
       <form id="eventForm">
-        <input type="hidden" id="eventId">
-
-        <label>
-          Titre
-          <input id="eventTitle" class="text-input" type="text" maxlength="100" required placeholder="Ex. Formation">
-        </label>
-
-        <div class="form-row">
-          <label>
-            Date
-            <input id="eventDate" class="text-input" type="date" required>
-          </label>
-          <label>
-            Catégorie
-            <select id="eventCategory" class="text-input">
-              <option value="Personnel">Personnel</option>
-              <option value="Travail">Travail</option>
-              <option value="Formation">Formation</option>
-              <option value="Rendez-vous">Rendez-vous</option>
-              <option value="Autre">Autre</option>
+        <input id="eventId" type="hidden">
+        <div class="form-grid">
+          <label>Titre<input id="eventTitle" required></label>
+          <label>Date<input id="eventDate" type="date" required></label>
+          <label>Début<input id="eventStart" type="time"></label>
+          <label>Fin<input id="eventEnd" type="time"></label>
+          <label>Catégorie
+            <select id="eventCategory">
+              <option>Personnel</option>
+              <option>Travail</option>
+              <option>Formation</option>
+              <option>Rendez-vous</option>
+              <option>Autre</option>
             </select>
           </label>
+          <label class="full">Description<textarea id="eventDescription" rows="4"></textarea></label>
         </div>
 
-        <div class="form-row">
-          <label>
-            Début
-            <input id="eventStart" class="text-input" type="time">
-          </label>
-          <label>
-            Fin
-            <input id="eventEnd" class="text-input" type="time">
-          </label>
-        </div>
-
-        <label>
-          Description
-          <textarea id="eventDescription" class="text-input textarea" maxlength="1000" placeholder="Informations complémentaires..."></textarea>
-        </label>
-
-        <label>
-          Couleur
-          <div class="color-options" id="colorOptions">
-            <button type="button" class="color-option selected" data-color="default" aria-label="Couleur standard"></button>
-            <button type="button" class="color-option color-blue" data-color="blue" aria-label="Bleu"></button>
-            <button type="button" class="color-option color-green" data-color="green" aria-label="Vert"></button>
-            <button type="button" class="color-option color-orange" data-color="orange" aria-label="Orange"></button>
-            <button type="button" class="color-option color-red" data-color="red" aria-label="Rouge"></button>
+        <div class="color-picker">
+          <span>Couleur</span>
+          <div class="color-options">
+            <button type="button" class="color-choice selected" data-color="default"></button>
+            <button type="button" class="color-choice blue" data-color="blue"></button>
+            <button type="button" class="color-choice green" data-color="green"></button>
+            <button type="button" class="color-choice orange" data-color="orange"></button>
+            <button type="button" class="color-choice red" data-color="red"></button>
           </div>
-        </label>
+        </div>
 
-        <div class="form-actions">
-          <button type="button" id="deleteEventBtn" class="button button-danger hidden">Supprimer</button>
-          <div class="form-actions-right">
-            <button type="button" id="cancelBtn" class="button button-secondary">Annuler</button>
-            <button type="submit" class="button button-primary">Enregistrer</button>
+        <div class="modal-actions">
+          <button type="button" id="deleteEventBtn" class="button danger hidden">Supprimer</button>
+          <div class="modal-actions-right">
+            <button type="button" id="cancelEventBtn" class="button secondary">Annuler</button>
+            <button type="submit" class="button primary">Enregistrer</button>
           </div>
         </div>
       </form>
+    </div>
+  </div>
+
+  <div id="rotationModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card rotation-modal">
+      <div class="modal-heading">
+        <div>
+          <div class="eyebrow">PLANNING</div>
+          <h2>Service par rotation</h2>
+        </div>
+        <button id="closeRotationModal" class="close-button">×</button>
+      </div>
+
+      <p class="modal-intro">
+        Configure les périodes de service. Une période normale suit automatiquement
+        un cycle de 6 jours travaillés puis 4 jours de repos. Les horaires des six
+        jours sont configurables individuellement.
+      </p>
+
+      <div class="rotation-section">
+        <div class="section-title-row">
+          <h3>Périodes</h3>
+          <button id="addPeriodBtn" class="button primary small">+ Ajouter une période</button>
+        </div>
+        <div id="periodsList"></div>
+      </div>
+
+      <div class="rotation-section">
+        <h3>Vacances</h3>
+        <div id="vacationsList" class="vacations-list"></div>
+        <button id="addVacationBtn" class="button secondary small">+ Ajouter des vacances</button>
+      </div>
+
+      <div class="modal-actions">
+        <div></div>
+        <div class="modal-actions-right">
+          <button type="button" id="cancelRotationBtn" class="button secondary">Fermer</button>
+          <button type="button" id="saveRotationBtn" class="button primary">Enregistrer</button>
+        </div>
+      </div>
     </div>
   </div>
 
