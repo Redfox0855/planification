@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f4f4f1">
+  <title>Calendrier personnel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">ESPACE PERSONNEL</div>
+        <h1>Calendrier</h1>
+      </div>
+
+      <div class="topbar-actions">
+        <button id="todayBtn" class="button button-secondary">Aujourd'hui</button>
+        <button id="themeBtn" class="icon-button" aria-label="Changer le thème" title="Changer le thème">☾</button>
+      </div>
+    </header>
+
+    <section class="calendar-card">
+      <div class="calendar-header">
+        <button id="prevMonth" class="nav-button" aria-label="Mois précédent">←</button>
+
+        <div class="month-title">
+          <span id="monthName"></span>
+          <span id="yearName"></span>
+        </div>
+
+        <button id="nextMonth" class="nav-button" aria-label="Mois suivant">→</button>
+      </div>
+
+      <div class="weekday-row">
+        <div>LUN</div><div>MAR</div><div>MER</div><div>JEU</div>
+        <div>VEN</div><div>SAM</div><div>DIM</div>
+      </div>
+
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </section>
+
+    <section class="bottom-layout">
+      <div class="panel">
+        <div class="panel-heading">
+          <div>
+            <div class="eyebrow">PROCHAINEMENT</div>
+            <h2>Événements à venir</h2>
+          </div>
+          <button id="addEventBtn" class="button button-primary">+ Ajouter</button>
+        </div>
+        <div id="upcomingEvents" class="upcoming-events"></div>
+      </div>
+
+      <div class="panel search-panel">
+        <div class="eyebrow">RECHERCHE</div>
+        <h2>Retrouver un événement</h2>
+        <input id="searchInput" class="text-input" type="search" placeholder="Rechercher..." autocomplete="off">
+        <div id="searchResults" class="search-results"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Calendrier personnel · V1</span>
+      <span id="storageStatus">Données enregistrées localement</span>
+    </footer>
+  </main>
+
+  <div id="modalBackdrop" class="modal-backdrop hidden">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div>
+          <div class="eyebrow">ÉVÉNEMENT</div>
+          <h2 id="modalTitle">Nouvel événement</h2>
+        </div>
+        <button id="closeModal" class="close-button" aria-label="Fermer">×</button>
+      </div>
+
+      <form id="eventForm">
+        <input type="hidden" id="eventId">
+
+        <label>
+          Titre
+          <input id="eventTitle" class="text-input" type="text" maxlength="100" required placeholder="Ex. Formation">
+        </label>
+
+        <div class="form-row">
+          <label>
+            Date
+            <input id="eventDate" class="text-input" type="date" required>
+          </label>
+          <label>
+            Catégorie
+            <select id="eventCategory" class="text-input">
+              <option value="Personnel">Personnel</option>
+              <option value="Travail">Travail</option>
+              <option value="Formation">Formation</option>
+              <option value="Rendez-vous">Rendez-vous</option>
+              <option value="Autre">Autre</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Début
+            <input id="eventStart" class="text-input" type="time">
+          </label>
+          <label>
+            Fin
+            <input id="eventEnd" class="text-input" type="time">
+          </label>
+        </div>
+
+        <label>
+          Description
+          <textarea id="eventDescription" class="text-input textarea" maxlength="1000" placeholder="Informations complémentaires..."></textarea>
+        </label>
+
+        <label>
+          Couleur
+          <div class="color-options" id="colorOptions">
+            <button type="button" class="color-option selected" data-color="default" aria-label="Couleur standard"></button>
+            <button type="button" class="color-option color-blue" data-color="blue" aria-label="Bleu"></button>
+            <button type="button" class="color-option color-green" data-color="green" aria-label="Vert"></button>
+            <button type="button" class="color-option color-orange" data-color="orange" aria-label="Orange"></button>
+            <button type="button" class="color-option color-red" data-color="red" aria-label="Rouge"></button>
+          </div>
+        </label>
+
+        <div class="form-actions">
+          <button type="button" id="deleteEventBtn" class="button button-danger hidden">Supprimer</button>
+          <div class="form-actions-right">
+            <button type="button" id="cancelBtn" class="button button-secondary">Annuler</button>
+            <button type="submit" class="button button-primary">Enregistrer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
