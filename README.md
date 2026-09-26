@@ -1,4 +1,4 @@
-# Calendrier personnel V2
+# Calendrier personnel V2.1
 
 Calendrier personnel statique destiné à être publié sur GitHub Pages.
 
@@ -35,3 +35,8 @@ Pour GitHub Pages :
 Cette V2 utilise `localStorage`. Les événements et la configuration de rotation sont donc stockés dans le navigateur utilisé.
 
 Pour une utilisation réellement synchronisée entre plusieurs appareils, une V3 pourra conserver exactement cette interface tout en remplaçant `localStorage` par une base distante privée avec authentification.
+
+
+## Déploiement recommandé
+
+La version `index.html` est autonome : elle contient déjà le CSS et le JavaScript. Pour GitHub Pages, tu peux simplement déposer **index.html seul** à la racine du dépôt. Les fichiers `style.css` et `script.js` sont également fournis séparément pour faciliter les modifications futures.
