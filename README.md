@@ -1,42 +1,23 @@
-# Calendrier personnel V2.1
+# Calendrier personnel V3
 
-Calendrier personnel statique destiné à être publié sur GitHub Pages.
+Version autonome : tout le CSS et le JavaScript sont intégrés dans `index.html`.
 
-## Fonctionnalités
+## Corrections V3
 
-- Calendrier mensuel.
-- Création, modification et suppression d'événements.
-- Recherche d'événements.
-- Mode clair / sombre.
-- Service par rotation configurable.
-- Rotation normale : 6 jours de travail + 4 jours de repos.
-- Horaires individuels pour les 6 jours :
-  - Jour : 06:30–16:00
-  - Soir : 14:30–00:00
-  - Nuit : 21:30–07:00
-- Service polyvalent : cycle de 8 jours avec 5 jours de travail et 3 jours de congé positionnables.
-- Repos affichés avec de fines hachures rouges.
-- Services affichés avec un fond bleu police transparent et l'horaire directement dans la cellule.
-- Vacances affichées avec un jaune très clair et sobre.
-
-## Utilisation
-
-Ouvre `index.html` localement pour tester l'application.
-
-Pour GitHub Pages :
-1. Crée un dépôt GitHub.
-2. Place `index.html`, `style.css` et `script.js` à la racine.
-3. Dans GitHub : Settings → Pages.
-4. Sélectionne la branche principale et le dossier `/root`.
-5. Enregistre.
-
-## Données
-
-Cette V2 utilise `localStorage`. Les événements et la configuration de rotation sont donc stockés dans le navigateur utilisé.
-
-Pour une utilisation réellement synchronisée entre plusieurs appareils, une V3 pourra conserver exactement cette interface tout en remplaçant `localStorage` par une base distante privée avec authentification.
-
-
-## Déploiement recommandé
-
-La version `index.html` est autonome : elle contient déjà le CSS et le JavaScript. Pour GitHub Pages, tu peux simplement déposer **index.html seul** à la racine du dépôt. Les fichiers `style.css` et `script.js` sont également fournis séparément pour faciliter les modifications futures.
+- « Aujourd'hui » et « Rotation » sont deux actions totalement indépendantes.
+- Rotation normale : 2 jours de jour → 2 jours de soir → 2 jours de nuit → 4 jours de repos.
+- Chaque période possède une date « Du » et une date « Au ».
+- La rotation n'est appliquée qu'à l'intérieur de cette période.
+- Aucun service n'est posé avant la date de début ou après la date de fin.
+- Les horaires sont affichés seuls dans les cellules, alignés à droite sous le numéro du jour.
+- « Vacances » et « Congé » sont alignés de la même manière.
+- Flèches de changement de mois centrées.
+- Suppression de « ESPACE PERSONNEL ».
+- Recherche déplacée dans l'en-tête, avant les boutons.
+- Suppression du bloc de recherche inférieur.
+- Service polyvalent 8 jours : 5 jours de travail et 3 jours de congé positionnables.
+- Jour : 06:30–16:00.
+- Soir : 14:30–00:00.
+- Nuit : 21:30–07:00.
+- Repos : hachures rouges fines.
+- Vacances : fond jaune très clair.
